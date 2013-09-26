@@ -39,6 +39,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import alshain01.Flags.Flags;
@@ -60,6 +61,13 @@ public class FlagsPlayer extends JavaPlugin {
 	 */
 	@Override
 	public void onEnable(){
+		PluginManager pm =  Bukkit.getServer().getPluginManager();
+
+		if(!pm.isPluginEnabled("Flags")) {
+		    this.getLogger().severe("Flags was not found. Shutting down.");
+		    pm.disablePlugin(this);
+		}
+		
 		// Connect to the data file
 		ModuleYML dataFile = new ModuleYML(this, "flags.yml");
 		
