@@ -1,52 +1,48 @@
-#Use <0> for the area plugin''s specific name (world, claim, region, residence, etc).
-#Use <1> for the area''s owner name OR the world name. 
-#  This is dependent on the area and if the plugin supports single 'owners'.
-#Use <2> for the name of the message is being sent to.
 Flag:
   AllowTpIn:
     Description: Allows or denies teleporting into an area.
-    AreaMessage: '&cYou are not allowed to teleport to &6<1>&c''s <0>.'
-    WorldMessage: '&cYou are not allowed to teleport to &6<1>&c.'
+    AreaMessage: '&c{Player}, you are not allowed to teleport to &6{Owner}&c''s {AreaType}.'
+    WorldMessage: '&c{Player}, you are not allowed to teleport to &6{World}&c.'
   AllowTpOut:
     Description: Allows or denies teleporting from an area.
-    AreaMessage: '&cYou are not allowed to teleport from &6<1>&c''s <0>.'
-    WorldMessage: '&cYou are not allowed to teleport from &6<1>&c.'
+    AreaMessage: '&c{Player}, you are not allowed to teleport from &6{Owner}&c''s {AreaType}.'
+    WorldMessage: '&c{Player}, you are not allowed to teleport from &6{World}&c.'
   Breeding:
     Description: Allows or denies animal breeding in the area.
-    AreaMessage: '&cYou are not allowed to breed animals in &6<1>&c''s <0>.'
-    WorldMessage: '&cYou are not allowed to breed animals in &6<1>&c.'
+    AreaMessage: '&c{Player}, you are not allowed to breed animals in &6{Owner}&c''s {AreaType}.'
+    WorldMessage: '&c{Player}, you are not allowed to breed animals in &6{World}&c.'
   Commands:
     Description: Allows or denies using slash commands in the area.
-    AreaMessage: '&cCommands are disabled in &6<1>&c''s <0>.'
-    WorldMessage: '&cCommands are disabled in &6<1>&c.'
+    AreaMessage: '&cCommands are disabled in &6{Owner}&c''s {AreaType}.'
+    WorldMessage: '&cCommands are disabled in &6{World}&c.'
   Eat:
     Description: Allows or denies eating or drinking in the area.
-    AreaMessage: '&cYou are not allowed to eat in &6<1>&c''s <0>.'
-    WorldMessage: '&cYou are not allowed to eat in &6<1>&c.'
+    AreaMessage: '&c{Player}, you are not allowed to eat in &6{Owner}&c''s {AreaType}.'
+    WorldMessage: '&c{Player}, you are not allowed to eat in &6{World}&c.'
     MinimumAPI: 1.5.2
   Experience:
     Description: Toggles gaining experience in the claim.
   Fishing:
     Description: Allows or denies fishing from in the area.
-    AreaMessage: '&cYou are not allowed to fish in &6<1>&c''s <0>.'
-    WorldMessage: '&cYou are not allowed to fish in &6<1>&c.'
+    AreaMessage: '&c{Player}, you are not allowed to fish in &6{Owner}&c''s {AreaType}.'
+    WorldMessage: '&c{Player}, you are not allowed to fish in &6{World}&c.'
   ItemPickup:
     Description: Allows or denies picking up items.
   ItemDrop:
     Description: Allows or denies dropping items in the area.
-    AreaMessage: '&cYou are not allowed to drop items in &6<1>&c''s <0>.'
-    WorldMessage: '&cYou are not allowed to drop items in &6<1>&c.'
+    AreaMessage: '&c{Player}, you are not allowed to drop items in &6{Owner}&c''s {AreaType}.'
+    WorldMessage: '&c{Player}, you are not allowed to drop items in &6{World}&c.'
   Level:
     Description: Allows or blocks gaining levels in the claim.
   Portal:
     Description: Allows or denies the use of portals in the area.
-    AreaMessage: '&cYou are not allowed use portals in &6<1>&c''s <0>.'
-    WorldMessage: '&cYou are not allowed use portals in &6<1>&c.'
+    AreaMessage: '&c{Player}, you are not allowed use portals in &6{Owner}&c''s {AreaType}.'
+    WorldMessage: '&c{Player}, you are not allowed use portals in &6{World}&c.'
   Trading:
     Description: Allows or denies trading with villagers.
-    AreaMessage: '&cYou are not allowed to trade in &6<1>&c''s <0>.'
-    WorldMessage: '&cYou are not allowed to trade in &6<1>&c.'
+    AreaMessage: '&c{Player}, you are not allowed to trade in &6{Owner}&c''s {AreaType}.'
+    WorldMessage: '&c{Player}, you are not allowed to trade in &6{World}&c.'
   TrapDoor:
     Description: Allows or denies players with AccessTrust from using trapdoors.
-    AreaMessage: '&cYou are not allowed to use trapdoors in &6<1>&c''s <0>.'
-    WorldMessage: '&cYou are not allowed to use trapdoors in &6<1>&c.'
+    AreaMessage: '&c{Player}, you are not allowed to use trapdoors in &6{Owner}&c''s {AreaType}.'
+    WorldMessage: '&c{Player}, you are not allowed to use trapdoors in &6{World}&c.'
