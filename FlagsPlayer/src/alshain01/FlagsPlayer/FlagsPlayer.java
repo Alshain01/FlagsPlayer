@@ -331,7 +331,7 @@ public class FlagsPlayer extends JavaPlugin {
 					
 			if (!area.getValue(flag, false)) {
 				player.sendMessage(area.getMessage(flag)
-						.replaceAll("<2>", player.getDisplayName()));
+						.replaceAll("\\{Player\\}", player.getDisplayName()));
 				e.setCancelled(true);
 			}
 		}
