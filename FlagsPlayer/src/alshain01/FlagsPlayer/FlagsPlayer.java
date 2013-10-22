@@ -109,8 +109,7 @@ public class FlagsPlayer extends JavaPlugin {
 	 */
 	public class PlayerListener implements Listener{
 		private void sendMessage(Player player, Flag flag, Area area) {
-			player.sendMessage(area.getMessage(flag)
-					.replaceAll("\\{Player\\}", player.getName()));
+			player.sendMessage(area.getMessage(flag, player.getName()));
 		}
 
 		private boolean isDenied(Player player, Flag flag, Area area) {
@@ -330,8 +329,7 @@ public class FlagsPlayer extends JavaPlugin {
 					|| area.getTrustList(flag).contains(player.getName())) { return; }
 					
 			if (!area.getValue(flag, false)) {
-				player.sendMessage(area.getMessage(flag)
-						.replaceAll("\\{Player\\}", player.getDisplayName()));
+				player.sendMessage(area.getMessage(flag, player.getName()));
 				e.setCancelled(true);
 			}
 		}
