@@ -113,7 +113,7 @@ public class FlagsPlayer extends JavaPlugin {
 		}
 
 		private boolean isDenied(Player player, Flag flag, Area area) {
-			if(flag.hasBypassPermission(player) 
+			if(player.hasPermission(flag.getBypassPermission())
 					|| area.getTrustList(flag).contains(player.getName())) { return false; }
 					
 			if (!area.getValue(flag, false)) {
@@ -143,7 +143,7 @@ public class FlagsPlayer extends JavaPlugin {
 		
 			// Teleport out of area
 			Flag flag = flags.getFlag("AllowTpOut");
-			if (!flag.hasBypassPermission(player) 
+			if (!player.hasPermission(flag.getBypassPermission())
 					&& !tpFrom.getTrustList(flag).contains(player.getName())) {
 				if (!tpFrom.getValue(flag, false)) {
 					e.setCancelled(true);
@@ -154,7 +154,7 @@ public class FlagsPlayer extends JavaPlugin {
 
 			// Teleport into area
 			flag = flags.getFlag("AllowTpIn");
-			if (!flag.hasBypassPermission(player) 
+			if (!player.hasPermission(flag.getBypassPermission())
 					&& !tpTo.getTrustList(flag).contains(player.getName())) {
 				if (!tpTo.getValue(flag, false)) {
 					e.setCancelled(true);
@@ -178,7 +178,7 @@ public class FlagsPlayer extends JavaPlugin {
 			if (entity instanceof Villager) {
 				flag = flags.getFlag("Trading");
 				// Villager trading
-				if (flag.hasBypassPermission(player) 
+				if (player.hasPermission(flag.getBypassPermission())
 						|| area.getTrustList(flag).contains(player.getName())) { return; }
 				
 				if(!area.getValue(flag, false)) {
@@ -193,7 +193,7 @@ public class FlagsPlayer extends JavaPlugin {
 						|| ((LivingEntity)entity).getHealth() != ((LivingEntity)entity).getMaxHealth())) { return; }
 				
 				flag = flags.getFlag("Breeding");
-				if (flag.hasBypassPermission(player) 
+				if (player.hasPermission(flag.getBypassPermission()) 
 						|| area.getTrustList(flag).contains(player.getName())) { return; }
 				
 				if (!area.getValue(flag, false)) {
@@ -212,7 +212,7 @@ public class FlagsPlayer extends JavaPlugin {
 			Area area = Director.getAreaAt(player.getLocation());
 			Flag flag = Flags.getRegistrar().getFlag("Level");
 			
-			if(flag.hasBypassPermission(player) 
+			if(player.hasPermission(flag.getBypassPermission())
 					|| area.getTrustList(flag).contains(player.getName())) { return; }
 
 			if (!area.getValue(flag, false)) {
@@ -234,7 +234,7 @@ public class FlagsPlayer extends JavaPlugin {
 			Area area = Director.getAreaAt(player.getLocation());
 			Flag flag = Flags.getRegistrar().getFlag("Experience");
 			
-			if(flag.hasBypassPermission(player) 
+			if(player.hasPermission(flag.getBypassPermission())
 					|| area.getTrustList(flag).contains(player.getName())) { return; }
 					
 			if (!area.getValue(flag, false)) {
@@ -253,7 +253,7 @@ public class FlagsPlayer extends JavaPlugin {
 			Area area = Director.getAreaAt(player.getLocation());
 			Flag flag = Flags.getRegistrar().getFlag("ItemPickup");
 					
-			if(flag.hasBypassPermission(player) 
+			if(player.hasPermission(flag.getBypassPermission())
 					|| area.getTrustList(flag).contains(player.getName())) { return; }
 
 			if (!area.getValue(flag, false)) {
@@ -325,7 +325,7 @@ public class FlagsPlayer extends JavaPlugin {
 			Flag flag = Flags.getRegistrar().getFlag("Eat");
 			Area area = Director.getAreaAt(e.getPlayer().getLocation());
 			
-			if(flag.hasBypassPermission(player) 
+			if(player.hasPermission(flag.getBypassPermission()) 
 					|| area.getTrustList(flag).contains(player.getName())) { return; }
 					
 			if (!area.getValue(flag, false)) {
