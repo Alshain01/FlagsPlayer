@@ -76,7 +76,7 @@ public class FlagsPlayer extends JavaPlugin {
 			final Area area = Director.getAreaAt(e.getPlayer().getLocation());
 
 			if (player.hasPermission(flag.getBypassPermission())
-					|| area.getTrustList(flag).contains(player.getName())) {
+					|| area.getTrustList(flag).contains(player.getName().toLowerCase())) {
 				return;
 			}
 
@@ -93,7 +93,7 @@ public class FlagsPlayer extends JavaPlugin {
 	public class PlayerListener implements Listener {
 		private boolean isDenied(Player player, Flag flag, Area area) {
 			if (player.hasPermission(flag.getBypassPermission())
-					|| area.getTrustList(flag).contains(player.getName())) {
+					|| area.getTrustList(flag).contains(player.getName().toLowerCase())) {
 				return false;
 			}
 
@@ -132,7 +132,7 @@ public class FlagsPlayer extends JavaPlugin {
 			final Flag flag = Flags.getRegistrar().getFlag("Experience");
 
 			if (player.hasPermission(flag.getBypassPermission())
-					|| area.getTrustList(flag).contains(player.getName())) {
+					|| area.getTrustList(flag).contains(player.getName().toLowerCase())) {
 				return;
 			}
 
@@ -179,7 +179,7 @@ public class FlagsPlayer extends JavaPlugin {
 				flag = flags.getFlag("Trading");
 				// Villager trading
 				if (player.hasPermission(flag.getBypassPermission())
-						|| area.getTrustList(flag).contains(player.getName())) {
+						|| area.getTrustList(flag).contains(player.getName().toLowerCase())) {
 					return;
 				}
 
@@ -198,7 +198,7 @@ public class FlagsPlayer extends JavaPlugin {
 
 				flag = flags.getFlag("Breeding");
 				if (player.hasPermission(flag.getBypassPermission())
-						|| area.getTrustList(flag).contains(player.getName())) {
+						|| area.getTrustList(flag).contains(player.getName().toLowerCase())) {
 					return;
 				}
 
@@ -219,7 +219,7 @@ public class FlagsPlayer extends JavaPlugin {
 			final Flag flag = Flags.getRegistrar().getFlag("Level");
 
 			if (player.hasPermission(flag.getBypassPermission())
-					|| area.getTrustList(flag).contains(player.getName())) {
+					|| area.getTrustList(flag).contains(player.getName().toLowerCase())) {
 				return;
 			}
 
@@ -244,7 +244,7 @@ public class FlagsPlayer extends JavaPlugin {
 			final Flag flag = Flags.getRegistrar().getFlag("ItemPickup");
 
 			if (player.hasPermission(flag.getBypassPermission())
-					|| area.getTrustList(flag).contains(player.getName())) {
+					|| area.getTrustList(flag).contains(player.getName().toLowerCase())) {
 				return;
 			}
 
@@ -285,7 +285,7 @@ public class FlagsPlayer extends JavaPlugin {
 			// Teleport out of area
 			Flag flag = flags.getFlag("AllowTpOut");
 			if (!player.hasPermission(flag.getBypassPermission())
-					&& !tpFrom.getTrustList(flag).contains(player.getName())) {
+					&& !tpFrom.getTrustList(flag).contains(player.getName().toLowerCase())) {
 				if (!tpFrom.getValue(flag, false)) {
 					e.setCancelled(true);
 					sendMessage(player, flag, tpFrom);
@@ -296,7 +296,7 @@ public class FlagsPlayer extends JavaPlugin {
 			// Teleport into area
 			flag = flags.getFlag("AllowTpIn");
 			if (!player.hasPermission(flag.getBypassPermission())
-					&& !tpTo.getTrustList(flag).contains(player.getName())) {
+					&& !tpTo.getTrustList(flag).contains(player.getName().toLowerCase())) {
 				if (!tpTo.getValue(flag, false)) {
 					e.setCancelled(true);
 					sendMessage(player, flag, tpTo);
