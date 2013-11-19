@@ -52,7 +52,6 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import alshain01.Flags.Director;
 import alshain01.Flags.Flag;
 import alshain01.Flags.Flags;
 import alshain01.Flags.ModuleYML;
@@ -73,7 +72,7 @@ public class FlagsPlayer extends JavaPlugin {
 		private void onPlayerItemConsume(PlayerItemConsumeEvent e) {
 			final Player player = e.getPlayer();
 			final Flag flag = Flags.getRegistrar().getFlag("Eat");
-			final Area area = Director.getAreaAt(e.getPlayer().getLocation());
+			final Area area = Area.getAt(e.getPlayer().getLocation());
 
 			if (player.hasPermission(flag.getBypassPermission())
 					|| area.getTrustList(flag).contains(player.getName().toLowerCase())) {
@@ -110,7 +109,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(ignoreCancelled = true)
 		private void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
 			e.setCancelled(isDenied(e.getPlayer(), Flags.getRegistrar()
-					.getFlag("Commands"), Director.getAreaAt(e.getPlayer().getLocation())));
+					.getFlag("Commands"), Area.getAt(e.getPlayer().getLocation())));
 		}
 
 		/*
@@ -119,7 +118,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(ignoreCancelled = true)
 		private void onPlayerDropItem(PlayerDropItemEvent e) {
 			e.setCancelled(isDenied(e.getPlayer(), Flags.getRegistrar()
-					.getFlag("ItemDrop"), Director.getAreaAt(e.getPlayer().getLocation())));
+					.getFlag("ItemDrop"), Area.getAt(e.getPlayer().getLocation())));
 		}
 
 		/*
@@ -128,7 +127,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(priority = EventPriority.MONITOR)
 		private void onPlayerExpChange(PlayerExpChangeEvent e) {
 			final Player player = e.getPlayer();
-			final Area area = Director.getAreaAt(player.getLocation());
+			final Area area = Area.getAt(player.getLocation());
 			final Flag flag = Flags.getRegistrar().getFlag("Experience");
 
 			if (player.hasPermission(flag.getBypassPermission())
@@ -149,7 +148,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(ignoreCancelled = true)
 		private void onPlayerFish(PlayerFishEvent e) {
 			e.setCancelled(isDenied(e.getPlayer(), Flags.getRegistrar()
-					.getFlag("Fishing"), Director.getAreaAt(e.getPlayer().getLocation())));
+					.getFlag("Fishing"), Area.getAt(e.getPlayer().getLocation())));
 		}
 
 		/*
@@ -160,7 +159,7 @@ public class FlagsPlayer extends JavaPlugin {
 			if (e.getAction() == Action.RIGHT_CLICK_BLOCK
 					&& e.getMaterial() == Material.TRAP_DOOR) {
 				e.setCancelled(isDenied(e.getPlayer(), Flags.getRegistrar()
-						.getFlag("TrapDoor"), Director.getAreaAt(e.getPlayer().getLocation())));
+						.getFlag("TrapDoor"), Area.getAt(e.getPlayer().getLocation())));
 			}
 		}
 
@@ -171,7 +170,7 @@ public class FlagsPlayer extends JavaPlugin {
 		private void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
 			final Player player = e.getPlayer();
 			final Entity entity = e.getRightClicked();
-			final Area area = Director.getAreaAt(player.getLocation());
+			final Area area = Area.getAt(player.getLocation());
 			final Registrar flags = Flags.getRegistrar();
 			Flag flag = null;
 
@@ -215,7 +214,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(priority = EventPriority.MONITOR)
 		private void onPlayerLevelChange(PlayerLevelChangeEvent e) {
 			final Player player = e.getPlayer();
-			final Area area = Director.getAreaAt(player.getLocation());
+			final Area area = Area.getAt(player.getLocation());
 			final Flag flag = Flags.getRegistrar().getFlag("Level");
 
 			if (player.hasPermission(flag.getBypassPermission())
@@ -240,7 +239,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(ignoreCancelled = true)
 		private void onPlayerPickupItem(PlayerPickupItemEvent e) {
 			final Player player = e.getPlayer();
-			final Area area = Director.getAreaAt(player.getLocation());
+			final Area area = Area.getAt(player.getLocation());
 			final Flag flag = Flags.getRegistrar().getFlag("ItemPickup");
 
 			if (player.hasPermission(flag.getBypassPermission())
@@ -259,7 +258,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(ignoreCancelled = true)
 		private void onPlayerPortal(PlayerPortalEvent e) {
 			e.setCancelled(isDenied(e.getPlayer(), Flags.getRegistrar()
-					.getFlag("Portal"), Director.getAreaAt(e.getPlayer().getLocation())));
+					.getFlag("Portal"), Area.getAt(e.getPlayer().getLocation())));
 		}
 
 		/*
@@ -277,8 +276,8 @@ public class FlagsPlayer extends JavaPlugin {
 			}
 
 			final Player player = e.getPlayer();
-			final Area tpFrom = Director.getAreaAt(e.getFrom());
-			final Area tpTo = Director.getAreaAt(e.getTo());
+			final Area tpFrom = Area.getAt(e.getFrom());
+			final Area tpTo = Area.getAt(e.getTo());
 
 			final Registrar flags = Flags.getRegistrar();
 
