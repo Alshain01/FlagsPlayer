@@ -1,48 +1,67 @@
 Flag:
   AllowTpIn:
     Description: Allows or denies teleporting into an area.
+    Player: true
     AreaMessage: '&c{Player}, you are not allowed to teleport to &6{Owner}&c''s {AreaType}.'
     WorldMessage: '&c{Player}, you are not allowed to teleport to &6{World}&c.'
   AllowTpOut:
     Description: Allows or denies teleporting from an area.
+    Player: true
     AreaMessage: '&c{Player}, you are not allowed to teleport from &6{Owner}&c''s {AreaType}.'
     WorldMessage: '&c{Player}, you are not allowed to teleport from &6{World}&c.'
   Breeding:
     Description: Allows or denies animal breeding in the area.
+    Player: true
     AreaMessage: '&c{Player}, you are not allowed to breed animals in &6{Owner}&c''s {AreaType}.'
     WorldMessage: '&c{Player}, you are not allowed to breed animals in &6{World}&c.'
   Commands:
     Description: Allows or denies using slash commands in the area.
+    Player: true
     AreaMessage: '&cCommands are disabled in &6{Owner}&c''s {AreaType}.'
     WorldMessage: '&cCommands are disabled in &6{World}&c.'
   Eat:
     Description: Allows or denies eating or drinking in the area.
+    Player: true
     AreaMessage: '&c{Player}, you are not allowed to eat in &6{Owner}&c''s {AreaType}.'
     WorldMessage: '&c{Player}, you are not allowed to eat in &6{World}&c.'
     MinimumAPI: 1.5.2
   Experience:
     Description: Toggles gaining experience in the claim.
+    Player: true
+    AreaMessage: 'unused'
+    WorldMessage: 'unused'
   Fishing:
     Description: Allows or denies fishing from in the area.
+    Player: true
     AreaMessage: '&c{Player}, you are not allowed to fish in &6{Owner}&c''s {AreaType}.'
     WorldMessage: '&c{Player}, you are not allowed to fish in &6{World}&c.'
   ItemPickup:
     Description: Allows or denies picking up items.
+    Player: true
+    AreaMessage: 'unused'
+    WorldMessage: 'unused'
   ItemDrop:
     Description: Allows or denies dropping items in the area.
+    Player: true
     AreaMessage: '&c{Player}, you are not allowed to drop items in &6{Owner}&c''s {AreaType}.'
     WorldMessage: '&c{Player}, you are not allowed to drop items in &6{World}&c.'
   Level:
     Description: Allows or blocks gaining levels in the claim.
+    Player: true
+    AreaMessage: 'unused'
+    WorldMessage: 'unused'
   Portal:
     Description: Allows or denies the use of portals in the area.
+    Player: true
     AreaMessage: '&c{Player}, you are not allowed use portals in &6{Owner}&c''s {AreaType}.'
     WorldMessage: '&c{Player}, you are not allowed use portals in &6{World}&c.'
   Trading:
     Description: Allows or denies trading with villagers.
+    Player: true
     AreaMessage: '&c{Player}, you are not allowed to trade in &6{Owner}&c''s {AreaType}.'
     WorldMessage: '&c{Player}, you are not allowed to trade in &6{World}&c.'
   TrapDoor:
     Description: Allows or denies players with AccessTrust from using trapdoors.
+    Player: true
     AreaMessage: '&c{Player}, you are not allowed to use trapdoors in &6{Owner}&c''s {AreaType}.'
     WorldMessage: '&c{Player}, you are not allowed to use trapdoors in &6{World}&c.'

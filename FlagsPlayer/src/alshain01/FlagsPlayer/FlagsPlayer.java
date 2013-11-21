@@ -32,7 +32,6 @@ import io.github.alshain01.Flags.area.Area;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -64,6 +63,28 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Alshain01
  */
 public class FlagsPlayer extends JavaPlugin {
+	/**
+	 * Called when this module is enabled
+	 */
+	@Override
+	public void onEnable() {
+		final PluginManager pm = Bukkit.getServer().getPluginManager();
+
+		if (!pm.isPluginEnabled("Flags")) {
+			getLogger().severe("Flags was not found. Shutting down.");
+			pm.disablePlugin(this);
+		}
+
+		// Connect to the data file and register the flags
+		Flags.getRegistrar().register(new ModuleYML(this, "flags.yml"), "Player");
+
+		// Load plug-in events and data
+		Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+		if (Flags.checkAPI("1.5.2")) {
+			Bukkit.getServer().getPluginManager().registerEvents(new PlayerConsumeListener(), this);
+		}
+	}
+	
 	/*
 	 * Handler for Eating Kept in isolated class due to version support.
 	 */
@@ -89,7 +110,7 @@ public class FlagsPlayer extends JavaPlugin {
 	/*
 	 * The event handlers for the flags we created earlier
 	 */
-	public class PlayerListener implements Listener {
+	private class PlayerListener implements Listener {
 		private boolean isDenied(Player player, Flag flag, Area area) {
 			if (player.hasPermission(flag.getBypassPermission())
 					|| area.getTrustList(flag).contains(player.getName().toLowerCase())) {
@@ -306,57 +327,6 @@ public class FlagsPlayer extends JavaPlugin {
 
 		private void sendMessage(Player player, Flag flag, Area area) {
 			player.sendMessage(area.getMessage(flag, player.getName()));
-		}
-	}
-
-	/**
-	 * Called when this module is enabled
-	 */
-	@Override
-	public void onEnable() {
-		final PluginManager pm = Bukkit.getServer().getPluginManager();
-
-		if (!pm.isPluginEnabled("Flags")) {
-			getLogger().severe("Flags was not found. Shutting down.");
-			pm.disablePlugin(this);
-		}
-
-		// Connect to the data file
-		final ModuleYML dataFile = new ModuleYML(this, "flags.yml");
-
-		// Register with Flags
-		final Registrar flags = Flags.getRegistrar();
-		for (final String f : dataFile.getModuleData().getConfigurationSection("Flag").getKeys(false)) {
-			final ConfigurationSection data = dataFile.getModuleData().getConfigurationSection("Flag." + f);
-
-			// We don't want to register flags that aren't supported.
-			// It would just muck up the help menu.
-			// Null value is assumed to support all versions.
-			final String api = data.getString("MinimumAPI");
-			if (api != null && !Flags.checkAPI(api)) {
-				continue;
-			}
-
-			// The description that appears when using help commands.
-			final String desc = data.getString("Description");
-
-			// The default message players get while in the area.
-			final String area = data.getString("AreaMessage");
-
-			// The default message players get while in an world.
-			final String world = data.getString("WorldMessage");
-
-			// Register it! (All flags are defaulting to true in this module)
-			// Be sure to send a plug-in name or group description for the help
-			// command!
-			// It can be this.getName() or another string.
-			flags.register(f, desc, true, "Player", area, world);
-		}
-
-		// Load plug-in events and data
-		Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
-		if (Flags.checkAPI("1.5.2")) {
-			Bukkit.getServer().getPluginManager().registerEvents(new PlayerConsumeListener(), this);
 		}
 	}
 }
