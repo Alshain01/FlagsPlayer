@@ -5,7 +5,13 @@
 	<version>1.0.4</version>
 	<name>FlagsPlayer</name>
 	<description>Module that adds player flags to the Flags plugin.</description>
-	<url>http://dev.bukkit.org/bukkit-plugins/flags/</url> 
+	<url>http://dev.bukkit.org/bukkit-plugins/flags/</url>
+
+    <properties>
+        <project.author>Alshain01</project.author>
+        <project.main>io.github.alshain01.FlagsPlayer.FlagsPlayer</project.main>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
 	<repositories>
 		<repository>
@@ -29,11 +35,7 @@
 		<tag>master</tag>
 	</scm>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
-	<build>
+    <build>
 		<defaultGoal>clean package install</defaultGoal>
 		<finalName>${project.name}</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
