@@ -25,6 +25,7 @@ package io.github.alshain01.FlagsPlayer;
 
 import io.github.alshain01.Flags.Flag;
 import io.github.alshain01.Flags.Flags;
+import io.github.alshain01.Flags.System;
 import io.github.alshain01.Flags.ModuleYML;
 import io.github.alshain01.Flags.Registrar;
 import io.github.alshain01.Flags.area.Area;
@@ -92,7 +93,7 @@ public class FlagsPlayer extends JavaPlugin {
 		private void onPlayerItemConsume(PlayerItemConsumeEvent e) {
 			final Player player = e.getPlayer();
 			final Flag flag = Flags.getRegistrar().getFlag("Eat");
-			final Area area = Area.getAt(e.getPlayer().getLocation());
+			final Area area = System.getActive().getAreaAt(e.getPlayer().getLocation());
 
 			if (player.hasPermission(flag.getBypassPermission())
 					|| area.getTrustList(flag).contains(player.getName().toLowerCase())) {
@@ -129,7 +130,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(ignoreCancelled = true)
 		private void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
 			e.setCancelled(isDenied(e.getPlayer(), Flags.getRegistrar()
-					.getFlag("Commands"), Area.getAt(e.getPlayer().getLocation())));
+					.getFlag("Commands"), System.getActive().getAreaAt(e.getPlayer().getLocation())));
 		}
 
 		/*
@@ -138,7 +139,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(ignoreCancelled = true)
 		private void onPlayerDropItem(PlayerDropItemEvent e) {
 			e.setCancelled(isDenied(e.getPlayer(), Flags.getRegistrar()
-					.getFlag("ItemDrop"), Area.getAt(e.getPlayer().getLocation())));
+					.getFlag("ItemDrop"), System.getActive().getAreaAt(e.getPlayer().getLocation())));
 		}
 
 		/*
@@ -147,7 +148,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(priority = EventPriority.MONITOR)
 		private void onPlayerExpChange(PlayerExpChangeEvent e) {
 			final Player player = e.getPlayer();
-			final Area area = Area.getAt(player.getLocation());
+			final Area area = System.getActive().getAreaAt(player.getLocation());
 			final Flag flag = Flags.getRegistrar().getFlag("Experience");
 
 			if (player.hasPermission(flag.getBypassPermission())
@@ -168,7 +169,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(ignoreCancelled = true)
 		private void onPlayerFish(PlayerFishEvent e) {
 			e.setCancelled(isDenied(e.getPlayer(), Flags.getRegistrar()
-					.getFlag("Fishing"), Area.getAt(e.getPlayer().getLocation())));
+					.getFlag("Fishing"), System.getActive().getAreaAt(e.getPlayer().getLocation())));
 		}
 
 		/*
@@ -179,7 +180,7 @@ public class FlagsPlayer extends JavaPlugin {
 			if (e.getAction() == Action.RIGHT_CLICK_BLOCK
 					&& e.getMaterial() == Material.TRAP_DOOR) {
 				e.setCancelled(isDenied(e.getPlayer(), Flags.getRegistrar()
-						.getFlag("TrapDoor"), Area.getAt(e.getPlayer().getLocation())));
+						.getFlag("TrapDoor"), System.getActive().getAreaAt(e.getPlayer().getLocation())));
 			}
 		}
 
@@ -190,9 +191,9 @@ public class FlagsPlayer extends JavaPlugin {
 		private void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
 			final Player player = e.getPlayer();
 			final Entity entity = e.getRightClicked();
-			final Area area = Area.getAt(player.getLocation());
+			final Area area = System.getActive().getAreaAt(player.getLocation());
 			final Registrar flags = Flags.getRegistrar();
-			Flag flag = null;
+			Flag flag;
 
 			if (entity instanceof Villager) {
 				flag = flags.getFlag("Trading");
@@ -234,7 +235,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(priority = EventPriority.MONITOR)
 		private void onPlayerLevelChange(PlayerLevelChangeEvent e) {
 			final Player player = e.getPlayer();
-			final Area area = Area.getAt(player.getLocation());
+			final Area area = System.getActive().getAreaAt(player.getLocation());
 			final Flag flag = Flags.getRegistrar().getFlag("Level");
 
 			if (player.hasPermission(flag.getBypassPermission())
@@ -259,7 +260,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(ignoreCancelled = true)
 		private void onPlayerPickupItem(PlayerPickupItemEvent e) {
 			final Player player = e.getPlayer();
-			final Area area = Area.getAt(player.getLocation());
+			final Area area = System.getActive().getAreaAt(player.getLocation());
 			final Flag flag = Flags.getRegistrar().getFlag("ItemPickup");
 
 			if (player.hasPermission(flag.getBypassPermission())
@@ -278,7 +279,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(ignoreCancelled = true)
 		private void onPlayerPortal(PlayerPortalEvent e) {
 			e.setCancelled(isDenied(e.getPlayer(), Flags.getRegistrar()
-					.getFlag("Portal"), Area.getAt(e.getPlayer().getLocation())));
+					.getFlag("Portal"), System.getActive().getAreaAt(e.getPlayer().getLocation())));
 		}
 
 		/*
@@ -287,7 +288,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(ignoreCancelled = true)
 		private void onPlayerTeleport(PlayerTeleportEvent e) {
 			// We don't want to cancel plugin teleporting
-			// Because that would mess with flight, allowleave, and allowexit.
+			// Because that would mess with flight, allow leave, and allow exit.
 			// Portals are handled in another event.
 			if (e.getCause() == TeleportCause.PLUGIN
 					|| e.getCause() == TeleportCause.END_PORTAL
@@ -296,8 +297,8 @@ public class FlagsPlayer extends JavaPlugin {
 			}
 
 			final Player player = e.getPlayer();
-			final Area tpFrom = Area.getAt(e.getFrom());
-			final Area tpTo = Area.getAt(e.getTo());
+			final Area tpFrom = System.getActive().getAreaAt(e.getFrom());
+			final Area tpTo = System.getActive().getAreaAt(e.getTo());
 
 			final Registrar flags = Flags.getRegistrar();
 
@@ -319,7 +320,6 @@ public class FlagsPlayer extends JavaPlugin {
 				if (!tpTo.getValue(flag, false)) {
 					e.setCancelled(true);
 					sendMessage(player, flag, tpTo);
-					return;
 				}
 			}
 		}
