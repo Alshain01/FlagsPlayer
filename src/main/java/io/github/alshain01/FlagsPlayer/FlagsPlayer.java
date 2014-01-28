@@ -23,12 +23,12 @@
  */
 package io.github.alshain01.FlagsPlayer;
 
-import io.github.alshain01.Flags.Flag;
-import io.github.alshain01.Flags.Flags;
-import io.github.alshain01.Flags.System;
-import io.github.alshain01.Flags.ModuleYML;
-import io.github.alshain01.Flags.Registrar;
-import io.github.alshain01.Flags.area.Area;
+import io.github.alshain01.flags.Flag;
+import io.github.alshain01.flags.Flags;
+import io.github.alshain01.flags.System;
+import io.github.alshain01.flags.ModuleYML;
+import io.github.alshain01.flags.Registrar;
+import io.github.alshain01.flags.area.Area;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
