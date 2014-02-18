@@ -27,11 +27,9 @@ import io.github.alshain01.flags.Flag;
 import io.github.alshain01.flags.Flags;
 import io.github.alshain01.flags.System;
 import io.github.alshain01.flags.ModuleYML;
-import io.github.alshain01.flags.Registrar;
 import io.github.alshain01.flags.area.Area;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -203,12 +201,20 @@ public class FlagsPlayer extends JavaPlugin {
 		 */
 		@EventHandler(ignoreCancelled = true)
 		private void onPlayerInteract(PlayerInteractEvent e) {
-			if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getMaterial() == Material.TRAP_DOOR) {
-                Flag flag = flags.get("TrapDoor");
-                if(flag != null) {
-				    e.setCancelled(isDenied(e.getPlayer(), flag, system.getAreaAt(e.getPlayer().getLocation())));
-                }
+			if (e.getAction() != Action.RIGHT_CLICK_BLOCK) { return; }
+            Flag flag = null;
+            switch (e.getMaterial()) {
+                case TRAP_DOOR:
+                    flag = flags.get("TrapDoor");
+                    break;
+                case ANVIL:
+                    flag = flags.get("Anvil");
+                    break;
 			}
+
+            if(flag != null) {
+                e.setCancelled(isDenied(e.getPlayer(), flag, system.getAreaAt(e.getPlayer().getLocation())));
+            }
 		}
 
 		/*

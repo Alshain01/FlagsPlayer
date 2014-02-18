@@ -61,7 +61,12 @@ Flag:
     AreaMessage: '&c{Player}, you are not allowed to trade in &6{Owner}&c''s {AreaType}.'
     WorldMessage: '&c{Player}, you are not allowed to trade in &6{World}&c.'
   TrapDoor:
-    Description: Allows or denies players with AccessTrust from using trapdoors.
+    Description: Toggles the ability to use trapdoors.
     Player: true
     AreaMessage: '&c{Player}, you are not allowed to use trapdoors in &6{Owner}&c''s {AreaType}.'
     WorldMessage: '&c{Player}, you are not allowed to use trapdoors in &6{World}&c.'
+  Anvil:
+    Description: Toggles the ability to use anvils.
+    Player: true
+    AreaMessage: '&c{Player}, you are not allowed to use anvils in &6{Owner}&c''s {AreaType}.'
+    WorldMessage: '&c{Player}, you are not allowed to use anvils in &6{World}&c.'
