@@ -80,10 +80,10 @@ public class FlagsPlayer extends JavaPlugin {
         Map<String, Flag> flagMap = new HashMap<String, Flag>();
         Flag eatFlag = null;
         for(Flag f : flags) {
-            if(f.getName() != "Eat") {
-                flagMap.put(f.getName(), f);
-            } else {
+            if(f.getName().equals("Eat")) {
                 eatFlag = f;
+            } else {
+                flagMap.put(f.getName(), f);
             }
         }
 
