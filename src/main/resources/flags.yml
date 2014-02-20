@@ -24,7 +24,6 @@ Flag:
     Player: true
     AreaMessage: '&c{Player}, you are not allowed to eat in &6{Owner}&c''s {AreaType}.'
     WorldMessage: '&c{Player}, you are not allowed to eat in &6{World}&c.'
-    MinimumAPI: 1.5.2
   Experience:
     Description: Toggles gaining experience in the claim.
     Player: true

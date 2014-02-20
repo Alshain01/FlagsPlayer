@@ -78,20 +78,12 @@ public class FlagsPlayer extends JavaPlugin {
 		// Connect to the data file and register the flags
         Set<Flag> flags = Flags.getRegistrar().register(new ModuleYML(this, "flags.yml"), "Player");
         Map<String, Flag> flagMap = new HashMap<String, Flag>();
-        Flag eatFlag = null;
         for(Flag f : flags) {
-            if(f.getName() != "Eat") {
-                flagMap.put(f.getName(), f);
-            } else {
-                eatFlag = f;
-            }
+            flagMap.put(f.getName(), f);
         }
 
 		// Load plug-in events and data
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(flagMap), this);
-		if (Flags.checkAPI("1.5.2")) {
-			Bukkit.getServer().getPluginManager().registerEvents(new PlayerConsumeListener(eatFlag), this);
-		}
 	}
 	
 	/*
@@ -144,6 +136,18 @@ public class FlagsPlayer extends JavaPlugin {
 			}
 			return false;
 		}
+
+        /*
+         * Handler for Eat
+         */
+        @EventHandler(ignoreCancelled = true)
+        private void onPlayerItemConsume(PlayerItemConsumeEvent e) {
+            Flag flag = flags.get("Eat");
+
+            if(flag != null) {
+                e.setCancelled(isDenied(e.getPlayer(), flag, system.getAreaAt(e.getPlayer().getLocation())));
+            }
+        }
 
 		/*
 		 * Handler for Commands
