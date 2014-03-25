@@ -25,7 +25,7 @@ package io.github.alshain01.flagsplayer;
 
 import io.github.alshain01.flags.Flag;
 import io.github.alshain01.flags.Flags;
-import io.github.alshain01.flags.System;
+import io.github.alshain01.flags.CuboidType;
 import io.github.alshain01.flags.ModuleYML;
 import io.github.alshain01.flags.area.Area;
 
@@ -62,6 +62,7 @@ import java.util.Set;
 /**
  * Flags Damage - Module that adds damage flags to the plug-in Flags.
  */
+@SuppressWarnings("unused")
 public class FlagsPlayer extends JavaPlugin {
 	/**
 	 * Called when this module is enabled
@@ -91,7 +92,7 @@ public class FlagsPlayer extends JavaPlugin {
 	 */
 	private class PlayerConsumeListener implements Listener {
         Flag flag;
-        final System system = System.getActive();
+        final CuboidType system = CuboidType.getActive();
 
         private PlayerConsumeListener (Flag flag) {
             this.flag = flag;
@@ -118,7 +119,7 @@ public class FlagsPlayer extends JavaPlugin {
 	 */
 	private class PlayerListener implements Listener {
         Map<String, Flag> flags;
-        final System system = System.getActive();
+        final CuboidType system = CuboidType.getActive();
 
         private PlayerListener(Map<String, Flag> flags) {
             this.flags = flags;
