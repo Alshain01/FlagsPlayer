@@ -23,13 +23,12 @@
  */
 package io.github.alshain01.flagsplayer;
 
-import io.github.alshain01.flags.Flag;
-import io.github.alshain01.flags.Flags;
-import io.github.alshain01.flags.CuboidType;
-import io.github.alshain01.flags.ModuleYML;
-import io.github.alshain01.flags.area.Area;
+import io.github.alshain01.flags.api.Flag;
+import io.github.alshain01.flags.api.FlagsAPI;
 
+import io.github.alshain01.flags.api.area.Area;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -74,10 +73,12 @@ public class FlagsPlayer extends JavaPlugin {
 		if (!pm.isPluginEnabled("Flags")) {
 			getLogger().severe("Flags was not found. Shutting down.");
 			pm.disablePlugin(this);
+            return;
 		}
 
 		// Connect to the data file and register the flags
-        Set<Flag> flags = Flags.getRegistrar().register(new ModuleYML(this, "flags.yml"), "Player");
+        YamlConfiguration flagConfig = YamlConfiguration.loadConfiguration(getResource("flags.yml"));
+        Set<Flag> flags = FlagsAPI.getRegistrar().register(flagConfig, "Player");
         Map<String, Flag> flagMap = new HashMap<String, Flag>();
         for(Flag f : flags) {
             flagMap.put(f.getName(), f);
@@ -91,8 +92,7 @@ public class FlagsPlayer extends JavaPlugin {
 	 * Handler for Eating Kept in isolated class due to version support.
 	 */
 	private class PlayerConsumeListener implements Listener {
-        Flag flag;
-        final CuboidType system = CuboidType.getActive();
+        final Flag flag;
 
         private PlayerConsumeListener (Flag flag) {
             this.flag = flag;
@@ -101,14 +101,14 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(ignoreCancelled = true)
 		private void onPlayerItemConsume(PlayerItemConsumeEvent e) {
 			final Player player = e.getPlayer();
-			final Area area = system.getAreaAt(e.getPlayer().getLocation());
+			final Area area = FlagsAPI.getAreaAt(e.getPlayer().getLocation());
 
 			if (player.hasPermission(flag.getBypassPermission()) || area.hasTrust(flag, player)) {
 				return;
 			}
 
 			if (!area.getValue(flag, false)) {
-				player.sendMessage(area.getMessage(flag, player.getName()));
+				player.sendMessage(area.getMessage(flag, player));
 				e.setCancelled(true);
 			}
 		}
@@ -118,8 +118,7 @@ public class FlagsPlayer extends JavaPlugin {
 	 * The event handlers for the flags we created earlier
 	 */
 	private class PlayerListener implements Listener {
-        Map<String, Flag> flags;
-        final CuboidType system = CuboidType.getActive();
+        final Map<String, Flag> flags;
 
         private PlayerListener(Map<String, Flag> flags) {
             this.flags = flags;
@@ -146,7 +145,7 @@ public class FlagsPlayer extends JavaPlugin {
             Flag flag = flags.get("Eat");
 
             if(flag != null) {
-                e.setCancelled(isDenied(e.getPlayer(), flag, system.getAreaAt(e.getPlayer().getLocation())));
+                e.setCancelled(isDenied(e.getPlayer(), flag, FlagsAPI.getAreaAt(e.getPlayer().getLocation())));
             }
         }
 
@@ -157,7 +156,7 @@ public class FlagsPlayer extends JavaPlugin {
 		private void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
             Flag flag = flags.get("Commands");
             if(flag != null) {
-			    e.setCancelled(isDenied(e.getPlayer(), flag, system.getAreaAt(e.getPlayer().getLocation())));
+			    e.setCancelled(isDenied(e.getPlayer(), flag, FlagsAPI.getAreaAt(e.getPlayer().getLocation())));
             }
 		}
 
@@ -168,7 +167,7 @@ public class FlagsPlayer extends JavaPlugin {
 		private void onPlayerDropItem(PlayerDropItemEvent e) {
             Flag flag = flags.get("ItemDrop");
             if(flag != null) {
-			    e.setCancelled(isDenied(e.getPlayer(), flag, system.getAreaAt(e.getPlayer().getLocation())));
+			    e.setCancelled(isDenied(e.getPlayer(), flag, FlagsAPI.getAreaAt(e.getPlayer().getLocation())));
             }
 		}
 
@@ -178,7 +177,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(priority = EventPriority.MONITOR)
 		private void onPlayerExpChange(PlayerExpChangeEvent e) {
 			final Player player = e.getPlayer();
-			final Area area = system.getAreaAt(player.getLocation());
+			final Area area = FlagsAPI.getAreaAt(player.getLocation());
 			final Flag flag = flags.get("Experience");
 
 			if (player.hasPermission(flag.getBypassPermission()) || area.hasTrust(flag, player)) {
@@ -197,7 +196,7 @@ public class FlagsPlayer extends JavaPlugin {
 		private void onPlayerFish(PlayerFishEvent e) {
             Flag flag = flags.get("Fishsing");
             if(flag != null) {
-			    e.setCancelled(isDenied(e.getPlayer(), flag, system.getAreaAt(e.getPlayer().getLocation())));
+			    e.setCancelled(isDenied(e.getPlayer(), flag, FlagsAPI.getAreaAt(e.getPlayer().getLocation())));
             }
 		}
 
@@ -218,7 +217,7 @@ public class FlagsPlayer extends JavaPlugin {
 			}
 
             if(flag != null) {
-                e.setCancelled(isDenied(e.getPlayer(), flag, system.getAreaAt(e.getPlayer().getLocation())));
+                e.setCancelled(isDenied(e.getPlayer(), flag, FlagsAPI.getAreaAt(e.getPlayer().getLocation())));
             }
 		}
 
@@ -229,7 +228,7 @@ public class FlagsPlayer extends JavaPlugin {
 		private void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
 			final Player player = e.getPlayer();
 			final Entity entity = e.getRightClicked();
-			final Area area = system.getAreaAt(player.getLocation());
+			final Area area = FlagsAPI.getAreaAt(player.getLocation());
 			Flag flag;
 
 			if (entity instanceof Villager) {
@@ -273,7 +272,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(priority = EventPriority.MONITOR)
 		private void onPlayerLevelChange(PlayerLevelChangeEvent e) {
 			final Player player = e.getPlayer();
-			final Area area = system.getAreaAt(player.getLocation());
+			final Area area = FlagsAPI.getAreaAt(player.getLocation());
 			final Flag flag = flags.get("Level");
             if(flag == null) { return; }
 
@@ -298,7 +297,7 @@ public class FlagsPlayer extends JavaPlugin {
 		@EventHandler(ignoreCancelled = true)
 		private void onPlayerPickupItem(PlayerPickupItemEvent e) {
 			final Player player = e.getPlayer();
-			final Area area = system.getAreaAt(player.getLocation());
+			final Area area = FlagsAPI.getAreaAt(player.getLocation());
 			final Flag flag = flags.get("ItemPickup");
             if(flag == null) { return; }
 
@@ -318,7 +317,7 @@ public class FlagsPlayer extends JavaPlugin {
 		private void onPlayerPortal(PlayerPortalEvent e) {
             Flag flag = flags.get("Portal");
             if(flag != null) {
-			    e.setCancelled(isDenied(e.getPlayer(), flag, system.getAreaAt(e.getPlayer().getLocation())));
+			    e.setCancelled(isDenied(e.getPlayer(), flag, FlagsAPI.getAreaAt(e.getPlayer().getLocation())));
             }
 		}
 
@@ -337,8 +336,8 @@ public class FlagsPlayer extends JavaPlugin {
 			}
 
 			final Player player = e.getPlayer();
-			final Area tpFrom = system.getAreaAt(e.getFrom());
-			final Area tpTo = system.getAreaAt(e.getTo());
+			final Area tpFrom = FlagsAPI.getAreaAt(e.getFrom());
+			final Area tpTo = FlagsAPI.getAreaAt(e.getTo());
 
 			// Teleport out of area
 			Flag flag = flags.get("AllowTpOut");
@@ -361,7 +360,7 @@ public class FlagsPlayer extends JavaPlugin {
 		}
 
 		private void sendMessage(Player player, Flag flag, Area area) {
-			player.sendMessage(area.getMessage(flag, player.getName()));
+			player.sendMessage(area.getMessage(flag, player));
 		}
 	}
 }

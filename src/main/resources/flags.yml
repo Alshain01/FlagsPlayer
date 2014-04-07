@@ -1,71 +1,70 @@
-Flag:
-  AllowTpIn:
-    Description: Toggles teleporting into an area.
-    Player: true
-    AreaMessage: '&c{Player}, you are not allowed to teleport to &6{Owner}&c''s {AreaType}.'
-    WildernessMessage: '&c{Player}, you are not allowed to teleport to &6{World}&c.'
-  AllowTpOut:
-    Description: Toggles teleporting from an area.
-    Player: true
-    AreaMessage: '&c{Player}, you are not allowed to teleport from &6{Owner}&c''s {AreaType}.'
-    WildernessMessage: '&c{Player}, you are not allowed to teleport from &6{World}&c.'
-  Breeding:
-    Description: Toggles animal breeding.
-    Player: true
-    AreaMessage: '&c{Player}, you are not allowed to breed animals in &6{Owner}&c''s {AreaType}.'
-    WildernessMessage: '&c{Player}, you are not allowed to breed animals in &6{World}&c.'
-  Commands:
-    Description: Toggles using slash commands.
-    Player: true
-    AreaMessage: '&cCommands are disabled in &6{Owner}&c''s {AreaType}.'
-    WildernessMessage: '&cCommands are disabled in &6{World}&c.'
-  Eat:
-    Description: Toggles eating or drinking.
-    Player: true
-    AreaMessage: '&c{Player}, you are not allowed to eat in &6{Owner}&c''s {AreaType}.'
-    WildernessMessage: '&c{Player}, you are not allowed to eat in &6{World}&c.'
-  Experience:
-    Description: Toggles gaining experience.
-    Player: true
-    AreaMessage: 'unused'
-    WildernessMessage: 'unused'
-  Fishing:
-    Description: Toggles fishing.
-    Player: true
-    AreaMessage: '&c{Player}, you are not allowed to fish in &6{Owner}&c''s {AreaType}.'
-    WildernessMessage: '&c{Player}, you are not allowed to fish in &6{World}&c.'
-  ItemPickup:
-    Description: Toggles picking up items.
-    Player: true
-    AreaMessage: 'unused'
-    WildernessMessage: 'unused'
-  ItemDrop:
-    Description: Toggles dropping items.
-    Player: true
-    AreaMessage: '&c{Player}, you are not allowed to drop items in &6{Owner}&c''s {AreaType}.'
-    WildernessMessage: '&c{Player}, you are not allowed to drop items in &6{World}&c.'
-  Level:
-    Description: Toggles gaining levels.
-    Player: true
-    AreaMessage: 'unused'
-    WildernessMessage: 'unused'
-  Portal:
-    Description: Toggles the use of portals.
-    Player: true
-    AreaMessage: '&c{Player}, you are not allowed use portals in &6{Owner}&c''s {AreaType}.'
-    WildernessMessage: '&c{Player}, you are not allowed use portals in &6{World}&c.'
-  Trading:
-    Description: Toggles trading with villagers.
-    Player: true
-    AreaMessage: '&c{Player}, you are not allowed to trade in &6{Owner}&c''s {AreaType}.'
-    WildernessMessage: '&c{Player}, you are not allowed to trade in &6{World}&c.'
-  TrapDoor:
-    Description: Toggles the ability to use trapdoors.
-    Player: true
-    AreaMessage: '&c{Player}, you are not allowed to use trapdoors in &6{Owner}&c''s {AreaType}.'
-    WildernessMessage: '&c{Player}, you are not allowed to use trapdoors in &6{World}&c.'
-  Anvil:
-    Description: Toggles the ability to use anvils.
-    Player: true
-    AreaMessage: '&c{Player}, you are not allowed to use anvils in &6{Owner}&c''s {AreaType}.'
-    WildernessMessage: '&c{Player}, you are not allowed to use anvils in &6{World}&c.'
+AllowTpIn:
+  Description: Toggles teleporting into an area.
+  Player: true
+  AreaMessage: '&c{Player}, you are not allowed to teleport to &6{Owner}&c''s {AreaType}.'
+  WildernessMessage: '&c{Player}, you are not allowed to teleport to &6{World}&c.'
+AllowTpOut:
+  Description: Toggles teleporting from an area.
+  Player: true
+  AreaMessage: '&c{Player}, you are not allowed to teleport from &6{Owner}&c''s {AreaType}.'
+  WildernessMessage: '&c{Player}, you are not allowed to teleport from &6{World}&c.'
+Breeding:
+  Description: Toggles animal breeding.
+  Player: true
+  AreaMessage: '&c{Player}, you are not allowed to breed animals in &6{Owner}&c''s {AreaType}.'
+  WildernessMessage: '&c{Player}, you are not allowed to breed animals in &6{World}&c.'
+Commands:
+  Description: Toggles using slash commands.
+  Player: true
+  AreaMessage: '&cCommands are disabled in &6{Owner}&c''s {AreaType}.'
+  WildernessMessage: '&cCommands are disabled in &6{World}&c.'
+Eat:
+  Description: Toggles eating or drinking.
+  Player: true
+  AreaMessage: '&c{Player}, you are not allowed to eat in &6{Owner}&c''s {AreaType}.'
+  WildernessMessage: '&c{Player}, you are not allowed to eat in &6{World}&c.'
+Experience:
+  Description: Toggles gaining experience.
+  Player: true
+  AreaMessage: 'unused'
+  WildernessMessage: 'unused'
+Fishing:
+  Description: Toggles fishing.
+  Player: true
+  AreaMessage: '&c{Player}, you are not allowed to fish in &6{Owner}&c''s {AreaType}.'
+  WildernessMessage: '&c{Player}, you are not allowed to fish in &6{World}&c.'
+ItemPickup:
+  Description: Toggles picking up items.
+  Player: true
+  AreaMessage: 'unused'
+  WildernessMessage: 'unused'
+ItemDrop:
+  Description: Toggles dropping items.
+  Player: true
+  AreaMessage: '&c{Player}, you are not allowed to drop items in &6{Owner}&c''s {AreaType}.'
+  WildernessMessage: '&c{Player}, you are not allowed to drop items in &6{World}&c.'
+Level:
+  Description: Toggles gaining levels.
+  Player: true
+  AreaMessage: 'unused'
+  WildernessMessage: 'unused'
+Portal:
+  Description: Toggles the use of portals.
+  Player: true
+  AreaMessage: '&c{Player}, you are not allowed use portals in &6{Owner}&c''s {AreaType}.'
+  WildernessMessage: '&c{Player}, you are not allowed use portals in &6{World}&c.'
+Trading:
+  Description: Toggles trading with villagers.
+  Player: true
+  AreaMessage: '&c{Player}, you are not allowed to trade in &6{Owner}&c''s {AreaType}.'
+  WildernessMessage: '&c{Player}, you are not allowed to trade in &6{World}&c.'
+TrapDoor:
+  Description: Toggles the ability to use trapdoors.
+  Player: true
+  AreaMessage: '&c{Player}, you are not allowed to use trapdoors in &6{Owner}&c''s {AreaType}.'
+  WildernessMessage: '&c{Player}, you are not allowed to use trapdoors in &6{World}&c.'
+Anvil:
+  Description: Toggles the ability to use anvils.
+  Player: true
+  AreaMessage: '&c{Player}, you are not allowed to use anvils in &6{Owner}&c''s {AreaType}.'
+  WildernessMessage: '&c{Player}, you are not allowed to use anvils in &6{World}&c.'
