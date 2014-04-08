@@ -107,8 +107,8 @@ public class FlagsPlayer extends JavaPlugin {
 				return;
 			}
 
-			if (!area.getValue(flag, false)) {
-				player.sendMessage(area.getMessage(flag, player));
+			if (!area.getState(flag, false)) {
+				player.sendMessage(area.getMessage(flag, player.getName()));
 				e.setCancelled(true);
 			}
 		}
@@ -130,7 +130,7 @@ public class FlagsPlayer extends JavaPlugin {
 				return false;
 			}
 
-			if (!area.getValue(flag, false)) {
+			if (!area.getState(flag, false)) {
 				sendMessage(player, flag, area);
 				return true;
 			}
@@ -184,7 +184,7 @@ public class FlagsPlayer extends JavaPlugin {
 				return;
 			}
 
-			if (flag != null && !area.getValue(flag, false) && e.getAmount() > 0) {
+			if (flag != null && !area.getState(flag, false) && e.getAmount() > 0) {
 			    e.setAmount(0);
 			}
 		}
@@ -240,7 +240,7 @@ public class FlagsPlayer extends JavaPlugin {
 					return;
 				}
 
-				if (!area.getValue(flag, false)) {
+				if (!area.getState(flag, false)) {
 					e.setCancelled(true);
 					sendMessage(player, flag, area);
 				}
@@ -259,7 +259,7 @@ public class FlagsPlayer extends JavaPlugin {
 					return;
 				}
 
-				if (!area.getValue(flag, false)) {
+				if (!area.getState(flag, false)) {
 					e.setCancelled(true);
 					sendMessage(player, flag, area);
 				}
@@ -280,7 +280,7 @@ public class FlagsPlayer extends JavaPlugin {
 				return;
 			}
 
-			if (!area.getValue(flag, false)) {
+			if (!area.getState(flag, false)) {
 				if (e.getNewLevel() > e.getOldLevel()) {
 					// You can't actually stop this event
 					// but you can make it ineffective by reducing a players
@@ -305,7 +305,7 @@ public class FlagsPlayer extends JavaPlugin {
 				return;
 			}
 
-			if (!area.getValue(flag, false)) {
+			if (!area.getState(flag, false)) {
 				e.setCancelled(true);
 			}
 		}
@@ -342,7 +342,7 @@ public class FlagsPlayer extends JavaPlugin {
 			// Teleport out of area
 			Flag flag = flags.get("AllowTpOut");
 			if (!player.hasPermission(flag.getBypassPermission()) && !tpFrom.hasTrust(flag, player)) {
-				if (!tpFrom.getValue(flag, false)) {
+				if (!tpFrom.getState(flag, false)) {
 					e.setCancelled(true);
 					sendMessage(player, flag, tpFrom);
 					return;
@@ -352,7 +352,7 @@ public class FlagsPlayer extends JavaPlugin {
 			// Teleport into area
 			flag = flags.get("AllowTpIn");
 			if (!player.hasPermission(flag.getBypassPermission()) && !tpTo.hasTrust(flag, player)) {
-				if (!tpTo.getValue(flag, false)) {
+				if (!tpTo.getState(flag, false)) {
 					e.setCancelled(true);
 					sendMessage(player, flag, tpTo);
 				}
@@ -360,7 +360,7 @@ public class FlagsPlayer extends JavaPlugin {
 		}
 
 		private void sendMessage(Player player, Flag flag, Area area) {
-			player.sendMessage(area.getMessage(flag, player));
+			player.sendMessage(area.getMessage(flag, player.getName()));
 		}
 	}
 }
