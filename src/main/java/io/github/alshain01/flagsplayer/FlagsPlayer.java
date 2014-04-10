@@ -54,6 +54,7 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -78,7 +79,7 @@ public class FlagsPlayer extends JavaPlugin {
 
 		// Connect to the data file and register the flags
         YamlConfiguration flagConfig = YamlConfiguration.loadConfiguration(getResource("flags.yml"));
-        Set<Flag> flags = FlagsAPI.getRegistrar().register(flagConfig, "Player");
+        Collection<Flag> flags = FlagsAPI.getRegistrar().registerFlag(flagConfig, "Player");
         Map<String, Flag> flagMap = new HashMap<String, Flag>();
         for(Flag f : flags) {
             flagMap.put(f.getName(), f);
