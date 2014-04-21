@@ -57,7 +57,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Flags Damage - Module that adds damage flags to the plug-in Flags.
@@ -181,13 +180,15 @@ public class FlagsPlayer extends JavaPlugin {
 			final Area area = FlagsAPI.getAreaAt(player.getLocation());
 			final Flag flag = flags.get("Experience");
 
-			if (player.hasPermission(flag.getBypassPermission()) || area.hasTrust(flag, player)) {
-				return;
-			}
+            if(flag != null) {
+                if (player.hasPermission(flag.getBypassPermission()) || area.hasTrust(flag, player)) {
+                    return;
+                }
 
-			if (flag != null && !area.getState(flag, false) && e.getAmount() > 0) {
-			    e.setAmount(0);
-			}
+                if (!area.getState(flag, false) && e.getAmount() > 0) {
+                    e.setAmount(0);
+                }
+            }
 		}
 
 		/*
